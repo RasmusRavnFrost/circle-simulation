@@ -33,6 +33,9 @@ function SvgZoomAndDrag(svgElement) {
     let zoomFactor = 1;
     let translateOffset = {x: 0, y: 0};
     let lastDrag;
+    let maxZoom = 4;
+    let minZoom = 0.01;
+    let zoomStep = 0.075;
 
     /**
      *
@@ -43,9 +46,9 @@ function SvgZoomAndDrag(svgElement) {
         // cross-browser wheel delta
         e = window.event || e; // old IE support
         let delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-        zoomFactor = (1 + delta / 20) * zoomFactor;
-        zoomFactor = Math.max(zoomFactor, 0.01);
-        zoomFactor = Math.min(zoomFactor, 3);
+        zoomFactor = (1 + delta * zoomStep) * zoomFactor;
+        zoomFactor = Math.max(zoomFactor, minZoom);
+        zoomFactor = Math.min(zoomFactor, maxZoom);
         UpdateZoom()
     }
 
