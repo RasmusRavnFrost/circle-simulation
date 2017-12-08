@@ -1,0 +1,29 @@
+
+
+svg {
+    /*position: fixed;*/
+    /*top: 2%;*/
+    /*left: 2%;*/
+    /*height: 96%;*/
+    /*width: 96%;*/
+    background-color: darkslategray;
+}
+
+svg.canvas {
+    background-color: cornsilk;
+}
+
+text {
+    stroke: #660000;
+    fill: #660000";
+}
+body {background-color: aliceblue;}
+
+
+
+ellipse.body {
+    background-color: indianred;
+    fill: #c6784c;
+    stroke: #6e3f2e;
+    stroke-width: 3;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "did-circle-simulation",
+  "version": "0.0.1",
+  "dependencies": {
+    "d3": "^4.11.0"
+  }
+}
