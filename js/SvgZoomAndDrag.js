@@ -31,35 +31,56 @@ function SvgZoomAndDrag(svgElement) {
     if (svgElement === null)
         return null;
     let zoomFactor = 1;
+    let oldZoomFactor = 1;
     let translateOffset = {x: 0, y: 0};
     let lastDrag;
     let maxZoom = 4;
     let minZoom = 0.01;
     let zoomStep = 0.075;
 
+
     /**
      *
      * Handless mouse scroll event
-     * @param e scroll-event
+     * @param event scroll-event
      */
-    function MouseWheelHandler(e) {
+    function MouseWheelHandler(event) {
         // cross-browser wheel delta
-        e = window.event || e; // old IE support
-        let delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+        event = window.event || event; // old IE support
+        let delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
+        oldZoomFactor = zoomFactor;
         zoomFactor = (1 + delta * zoomStep) * zoomFactor;
         zoomFactor = Math.max(zoomFactor, minZoom);
         zoomFactor = Math.min(zoomFactor, maxZoom);
-        UpdateZoom()
+        UpdateZoom(event);
+
     }
 
     /**
      * Updates scale to current zoom factor value
      */
-    function UpdateZoom() {
+    function UpdateZoom(event) {
         let translateCenter = {
-            x: svgElement.getBoundingClientRect().width / 2 + translateOffset.x,
-            y: svgElement.getBoundingClientRect().height / 2 + translateOffset.y
+            x: svgElement.getBoundingClientRect().width / 2 + translateOffset.x * zoomFactor,
+            y: svgElement.getBoundingClientRect().height / 2 + translateOffset.y * zoomFactor,
         };
+
+        // Todo: Zoom in towards mouse position
+        // if (event) {
+        //     let deltaZoom = zoomFactor - oldZoomFactor;
+        //     let mouseOffset = svgElement.createSVGPoint();
+        //     mouseOffset.x = (event.clientX - svgElement.getBoundingClientRect().width / 2) / zoomFactor;
+        //     mouseOffset.y = (event.clientY - svgElement.getBoundingClientRect().width / 2) / zoomFactor;
+        //     mouseOffset.matrixTransform(svgElement.getScreenCTM().inverse());
+        //     if (!isNaN(mouseOffset.x)) {
+        //         translateCenter.x -= mouseOffset.x * deltaZoom * zoomFactor;
+        //     }
+        //     if (!isNaN(mouseOffset.y)) {
+        //         translateCenter.y -= mouseOffset.y * deltaZoom  * zoomFactor;
+        //     }
+        //     console.log(mouseOffset)
+        // }
+
         let children = svgElement.children;
         for (let i = 0; i < children.length; i++) {
             let child = children[i];
@@ -67,8 +88,8 @@ function SvgZoomAndDrag(svgElement) {
             transformObj.translate = translateCenter;
             transformObj.scale = {x: zoomFactor, y: zoomFactor};
             child.setAttribute("transform", ObjToTransform(transformObj));
-            // console.log(transformObj);
         }
+        oldZoomFactor = zoomFactor;
     }
 
     function dragstarted(d) {
@@ -77,8 +98,8 @@ function SvgZoomAndDrag(svgElement) {
 
     function dragged(d) {
         let newDrag = d3.mouse(svgElement);
-        translateOffset.x += newDrag[0] - lastDrag[0];
-        translateOffset.y += (newDrag[1] - lastDrag[1]);
+        translateOffset.x += (newDrag[0] - lastDrag[0]) / zoomFactor;
+        translateOffset.y += (newDrag[1] - lastDrag[1]) / zoomFactor;
         lastDrag = newDrag;
         UpdateZoom();
     }
@@ -104,17 +125,17 @@ function SvgZoomAndDrag(svgElement) {
 
     UpdateZoom();
     return {
-        setZoom: function(newZoomFactor) {
+        setZoom: function (newZoomFactor) {
             zoomFactor = newZoomFactor;
             UpdateZoom();
         },
-        getZoom: function() {
+        getZoom: function () {
             return zoomFactor;
         },
-        getTranslateOffset: function() {
+        getTranslateOffset: function () {
             return translateOffset;
         },
-        setTranslateOffset: function(newOffset) {
+        setTranslateOffset: function (newOffset) {
             translateOffset = newOffset;
             UpdateZoom();
         }
@@ -177,5 +198,6 @@ let matrixToTransformObj = function (matrix) {
 function ObjToTransform(obj) {
     return 'rotate(' + obj.rotate + ') ' +
         'translate(' + obj.translate.x + ',' + obj.translate.y + ') ' +
-        'scale(' + obj.scale.x + ',' + obj.scale.y + ')';
+        'scale(' + obj.scale.x + ',' + obj.scale.y + ') ';
+
 }

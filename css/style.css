@@ -1,11 +1,11 @@
 
 
 svg {
-    /*position: fixed;*/
-    /*top: 2%;*/
-    /*left: 2%;*/
-    /*height: 96%;*/
-    /*width: 96%;*/
+    position: fixed;
+    top: 2%;
+    left: 2%;
+    height: 96%;
+    width: 96%;
     background-color: darkslategray;
 }
 
@@ -14,7 +14,7 @@ svg.canvas {
 }
 
 text {
-    stroke: #660000;
+    /*stroke: #660000;*/
     fill: #660000";
 }
 body {background-color: aliceblue;}

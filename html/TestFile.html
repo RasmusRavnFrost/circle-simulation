@@ -10,20 +10,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="../js/SvgZoomAndDrag.js"></script>
     <script src="../js/testSimulation.js"></script>
+    <script src="../js/CircleNode.js"></script>
+    <script src="../js/circleSimulation.js"></script>
 </head>
 <body>
 
 <svg class="background" id="mainCanvas" width="500" height="400">
-    <g class="canvasGroup">
+    <g class="canvasGroup" id="mainGroup">
         <!--<circle r="50"></circle>-->
+        <!--<circle r="50" cx="5000"></circle>-->
+        <!--<circle r="50" cx="4000"></circle>-->
+        <!--<circle r="50" cx="-5000"></circle>-->
+        <!--<circle r="50" cx="-4000"></circle>-->
     </g>
 </svg>
 <script>
     let svgElement = document.getElementById("mainCanvas");
+    // testSimulation(svgElement);
     let handler = SvgZoomAndDrag(svgElement);
 
-    testSimulation(svgElement);
-    handler.setZoom(1);
+
+    let a = new CircleNode(null);
+    let b = new CircleNode(a);
+    let c = new CircleNode(a);
+    let d = new CircleNode(a);
+    let e = new CircleNode(b);
+    let f = new CircleNode(c);
+    let mainGroup = document.getElementById("mainGroup");
+
+    circleSimulation(mainGroup);
+
+
 </script>
 
 <!--<br>-->
