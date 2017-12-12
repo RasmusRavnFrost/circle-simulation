@@ -1,11 +1,15 @@
 
 
 svg {
-    position: fixed;
-    top: 2%;
-    left: 2%;
-    height: 96%;
-    width: 96%;
+    /*position: fixed;*/
+    /*top: 2%;*/
+    /*left: 2%;*/
+    /*height: 96%;*/
+    /*width: 96%;*/
+    /*top: auto;*/
+    /*left: auto;*/
+    /*height: auto;*/
+    /*width: auto;*/
     background-color: darkslategray;
 }
 
@@ -19,10 +23,8 @@ text {
 }
 body {background-color: aliceblue;}
 
-
-
 ellipse.body {
-    background-color: indianred;
+    /*background-color: indianred;*/
     fill: #c6784c;
     stroke: #6e3f2e;
     stroke-width: 3;

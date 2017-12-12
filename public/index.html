@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Circle Simulation</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/SvgZoomAndDrag.js"></script>
+    <script src="js/testSimulation.js"></script>
+    <script src="js/CircleNode.js"></script>
+    <script src="js/circleSimulation.js"></script>
+</head>
+<body>
+<br>
+Number of Circles:
+<input id="numberOfCircles" type="number" title="Number of Circles" value="100">
+<br>
+Number of branches:
+<input id="numberOfBranches" type="number" title="Number of Circles" value="1">
+<br>
+<button onclick="restartSimulation()">restartSimulation</button>
+<br>
+
+<svg class="background" id="mainCanvas" width="1000" height="800">
+    <g class="canvasGroup" id="mainGroup"></g>
+</svg>
+<script src="js/main.js"></script>
+</body>
+</html>
