@@ -10,7 +10,7 @@ function circleSimulation(svgParentElement) {
     let simulation = d3.forceSimulation()
         .force("repulsion_force", d3.forceManyBody())
         .force("center_force", d3.forceCenter(0, 0))
-        .force("collision_force", d3.forceCollide(d => {return d.collisionRadiusFactor * d.radius * 0.9;}))
+        .force("collision_force", d3.forceCollide(d => {return d.collisionRadiusFactor * d.radius;}))
         .force("link_force", d3.forceLink().id(function (d) {return d.id;}))
     ;
     simulation.nodes(CircleNode.allCircles);

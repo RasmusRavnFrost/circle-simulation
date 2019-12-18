@@ -19,13 +19,13 @@ svg.canvas {
 
 text {
     /*stroke: #660000;*/
-    fill: #660000";
+    /*fill: #660000;*/
 }
 body {background-color: aliceblue;}
 
 ellipse.body {
     /*background-color: indianred;*/
-    fill: #c6784c;
-    stroke: #6e3f2e;
+    fill: #a0c68e;
+    stroke: #edf298;
     stroke-width: 3;
 }

@@ -9,7 +9,7 @@ class CircleNode {
 
     constructor(parentCircle) {
         this.radius = r * 3;
-        this.fill = "rgb(200,200,150)";
+        this.fill = "#a0c68e";
         this.level = 0;
         this.drawLevel = 0;
         this.text = "Level " + this.level;
@@ -41,7 +41,7 @@ class CircleNode {
         this.radius = this.radius / (this.level + 2);
         // Determines if node should be colored
         if (Math.random() > 0.2) {
-            this.fill = "rgb(150,140,200)";
+            this.fill = "#edf298";
         } else {
             this.drawLevel = -1;
             this.radius = this.radius * 1;
@@ -128,8 +128,13 @@ CircleNode.assignRelativesCount = function () {
             let currentChild = currentCircle.children[j];
             currentCircle.relativesCount += currentChild.relativesCount + 1;
         }
-
     }
+
+    // for (let i = 0; i < sortedCircles.length; i++) {
+    //     let childCount = sortedCircles[i].children.length;
+    //     sortedCircles[i].radius = r * (Math.log(childCount + 1) + 1)
+    //     // sortedCircles[i].radius = r * (Math.log(childCount + 1) + 1)
+    // }
 };
 
 
